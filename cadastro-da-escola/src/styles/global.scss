@@ -1,0 +1,149 @@
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding: 0;
+  background: #EEEFF4;
+  font-family: "proxima-nova", sans-serif;
+  color: #454957;
+  min-width: 1260px;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+input,
+textarea,
+select,
+button {
+  font-size: 15px;
+  outline: 0;
+  outline: none;
+}
+
+p {
+  margin: 0;
+}
+
+strong {
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+}
+
+::-webkit-input-placeholder {
+  color: #BEBEC3;
+}
+
+::-moz-placeholder {
+  color: #BEBEC3;
+}
+
+:-ms-input-placeholder {
+  color: #BEBEC3;
+}
+
+:-moz-placeholder {
+  color: #BEBEC3;
+}
+
+.limit-text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden !important;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+// Text
+.normal-text {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 14px;
+}
+
+.smaller-text {
+  font-size: 12px;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+
+// Floats
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+// Flexbox
+.row {
+  margin-right: -10px;
+  margin-left: -10px;
+}
+
+.row.row-bottom-margin {
+  margin-bottom: 20px;
+}
+
+.row.row-bottom-margin-large {
+  margin-bottom: 30px;
+}
+
+.col-xs,
+.col-xs-1,
+.col-xs-10,
+.col-xs-11,
+.col-xs-12,
+.col-xs-2,
+.col-xs-3,
+.col-xs-4,
+.col-xs-5,
+.col-xs-6,
+.col-xs-7,
+.col-xs-8,
+.col-xs-9,
+.col-xs-offset-0,
+.col-xs-offset-1,
+.col-xs-offset-10,
+.col-xs-offset-11,
+.col-xs-offset-12,
+.col-xs-offset-2,
+.col-xs-offset-3,
+.col-xs-offset-4,
+.col-xs-offset-5,
+.col-xs-offset-6,
+.col-xs-offset-7,
+.col-xs-offset-8,
+.col-xs-offset-9 {
+  padding-right: 10px;
+  padding-left: 10px;
+}
