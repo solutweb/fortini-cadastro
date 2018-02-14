@@ -5,6 +5,7 @@ import VueFire from 'vuefire'
 import App from './App'
 import router from './router'
 import Header from '@/components/shared/header/Header'
+import '../node_modules/bulma/bulma.sass'
 
 Vue.config.productionTip = false
 Vue.use(VueFire)
