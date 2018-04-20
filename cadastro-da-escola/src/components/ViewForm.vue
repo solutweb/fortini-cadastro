@@ -179,45 +179,45 @@
               <ul>
                 <li>
                   <strong>Fundamental de 1º ao 5º ano</strong><br>
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.firstToFifth > 0, 'has-text-grey-light': partnerRegistration.school.shifts.morning.firstToFifth == 0,  }">
-                    {{partnerRegistration.school.shifts.morning.firstToFifth}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.firstToFifth > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.morning.firstToFifth }">
+                    {{partnerRegistration.school.shifts.morning.firstToFifth || 0}}
                   </span>
                   alunos e
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.firsttoFifthTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.morning.firsttoFifthTeachers == 0,  }">
-                    {{partnerRegistration.school.shifts.morning.firsttoFifthTeachers}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.firsttoFifthTeachers > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.morning.firsttoFifthTeachers }">
+                    {{partnerRegistration.school.shifts.morning.firsttoFifthTeachers || 0}}
                   </span>
                     professores
                 </li>
                 <li>
                   <strong>Fundamental de 6º ao 9º ano</strong><br>
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.sixthToNinth > 0, 'has-text-grey': partnerRegistration.school.shifts.morning.sixthToNinth == 0,  }">
-                    {{partnerRegistration.school.shifts.morning.sixthToNinth}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.sixthToNinth > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.morning.sixthToNinth }">
+                    {{partnerRegistration.school.shifts.morning.sixthToNinth || 0}}
                   </span>
                   alunos e
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.sixthToNinthTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.morning.sixthToNinthTeachers == 0,  }">
-                    {{partnerRegistration.school.shifts.morning.sixthToNinthTeachers}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.sixthToNinthTeachers > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.morning.sixthToNinthTeachers }">
+                    {{partnerRegistration.school.shifts.morning.sixthToNinthTeachers || 0}}
                   </span>
                     professores
                 </li>
                 <li>
                   <strong>Médio: do 1º ao 3º ano</strong><br>
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.firstToThirdTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.morning.firstToThird == 0,  }">
-                    {{partnerRegistration.school.shifts.morning.firstToThird}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.firstToThird > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.morning.firstToThird }">
+                    {{partnerRegistration.school.shifts.morning.firstToThird || 0}}
                   </span>
                   alunos e
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.firstToThirdTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.morning.firstToThirdTeachers == 0,  }">
-                    {{partnerRegistration.school.shifts.morning.firstToThirdTeachers}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.firstToThirdTeachers > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.morning.firstToThirdTeachers }">
+                    {{partnerRegistration.school.shifts.morning.firstToThirdTeachers || 0}}
                   </span>
                     professores
                 </li>
                 <li>
                   <strong>EJA</strong><br>
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.eja > 0, 'has-text-grey-light': partnerRegistration.school.shifts.morning.eja == 0,  }">
-                    {{partnerRegistration.school.shifts.morning.eja}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.eja > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.morning.eja }">
+                    {{partnerRegistration.school.shifts.morning.eja || 0}}
                   </span>
                   alunos e
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.ejaTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.morning.ejaTeachers == 0,  }">
-                    {{partnerRegistration.school.shifts.morning.ejaTeachers}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.morning.ejaTeachers > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.morning.ejaTeachers }">
+                    {{partnerRegistration.school.shifts.morning.ejaTeachers || 0}}
                   </span>
                     professores
                 </li>
@@ -235,45 +235,45 @@
               <ul>
                 <li>
                   <strong>Fundamental de 1º ao 5º ano</strong><br>
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.firstToFifth > 0, 'has-text-grey-light': partnerRegistration.school.shifts.afternoon.firstToFifth == 0,  }">
-                    {{partnerRegistration.school.shifts.afternoon.firstToFifth}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.firstToFifth > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.afternoon.firstToFifth }">
+                    {{partnerRegistration.school.shifts.afternoon.firstToFifth || 0}}
                   </span>
                   alunos e
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.firsttoFifthTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.afternoon.firsttoFifthTeachers == 0,  }">
-                    {{partnerRegistration.school.shifts.afternoon.firsttoFifthTeachers}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.firsttoFifthTeachers > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.afternoon.firsttoFifthTeachers }">
+                    {{partnerRegistration.school.shifts.afternoon.firsttoFifthTeachers || 0}}
                   </span>
                     professores
                 </li>
                 <li>
                   <strong>Fundamental de 6º ao 9º ano</strong><br>
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.sixthToNinth > 0, 'has-text-grey': partnerRegistration.school.shifts.afternoon.sixthToNinth == 0,  }">
-                    {{partnerRegistration.school.shifts.afternoon.sixthToNinth}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.sixthToNinth > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.afternoon.sixthToNinth }">
+                    {{partnerRegistration.school.shifts.afternoon.sixthToNinth || 0}}
                   </span>
                   alunos e
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.sixthToNinthTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.afternoon.sixthToNinthTeachers == 0,  }">
-                    {{partnerRegistration.school.shifts.afternoon.sixthToNinthTeachers}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.sixthToNinthTeachers > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.afternoon.sixthToNinthTeachers }">
+                    {{partnerRegistration.school.shifts.afternoon.sixthToNinthTeachers || 0}}
                   </span>
                     professores
                 </li>
                 <li>
                   <strong>Médio: do 1º ao 3º ano</strong><br>
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.firstToThirdTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.afternoon.firstToThird == 0,  }">
-                    {{partnerRegistration.school.shifts.afternoon.firstToThird}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.firstToThird > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.afternoon.firstToThird }">
+                    {{partnerRegistration.school.shifts.afternoon.firstToThird || 0}}
                   </span>
                   alunos e
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.firstToThirdTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.afternoon.firstToThirdTeachers == 0,  }">
-                    {{partnerRegistration.school.shifts.afternoon.firstToThirdTeachers}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.firstToThirdTeachers > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.afternoon.firstToThirdTeachers }">
+                    {{partnerRegistration.school.shifts.afternoon.firstToThirdTeachers || 0}}
                   </span>
                     professores
                 </li>
                 <li>
                   <strong>EJA</strong><br>
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.eja > 0, 'has-text-grey-light': partnerRegistration.school.shifts.afternoon.eja == 0,  }">
-                    {{partnerRegistration.school.shifts.afternoon.eja}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.eja > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.afternoon.eja }">
+                    {{partnerRegistration.school.shifts.afternoon.eja || 0}}
                   </span>
                   alunos e
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.ejaTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.afternoon.ejaTeachers == 0,  }">
-                    {{partnerRegistration.school.shifts.afternoon.ejaTeachers}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.afternoon.ejaTeachers > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.afternoon.ejaTeachers }">
+                    {{partnerRegistration.school.shifts.afternoon.ejaTeachers || 0}}
                   </span>
                     professores
                 </li>
@@ -291,45 +291,45 @@
               <ul>
                 <li>
                   <strong>Fundamental de 1º ao 5º ano</strong><br>
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.firstToFifth > 0, 'has-text-grey-light': partnerRegistration.school.shifts.night.firstToFifth == 0,  }">
-                    {{partnerRegistration.school.shifts.night.firstToFifth}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.firstToFifth > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.night.firstToFifth }">
+                    {{partnerRegistration.school.shifts.night.firstToFifth || 0}}
                   </span>
                   alunos e
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.firsttoFifthTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.night.firsttoFifthTeachers == 0,  }">
-                    {{partnerRegistration.school.shifts.night.firsttoFifthTeachers}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.firsttoFifthTeachers > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.night.firsttoFifthTeachers }">
+                    {{partnerRegistration.school.shifts.night.firsttoFifthTeachers || 0}}
                   </span>
                     professores
                 </li>
                 <li>
                   <strong>Fundamental de 6º ao 9º ano</strong><br>
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.sixthToNinth > 0, 'has-text-grey': partnerRegistration.school.shifts.night.sixthToNinth == 0,  }">
-                    {{partnerRegistration.school.shifts.night.sixthToNinth}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.sixthToNinth > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.night.sixthToNinth }">
+                    {{partnerRegistration.school.shifts.night.sixthToNinth || 0}}
                   </span>
                   alunos e
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.sixthToNinthTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.night.sixthToNinthTeachers == 0,  }">
-                    {{partnerRegistration.school.shifts.night.sixthToNinthTeachers}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.sixthToNinthTeachers > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.night.sixthToNinthTeachers }">
+                    {{partnerRegistration.school.shifts.night.sixthToNinthTeachers || 0}}
                   </span>
                     professores
                 </li>
                 <li>
                   <strong>Médio: do 1º ao 3º ano</strong><br>
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.firstToThirdTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.night.firstToThird == 0,  }">
-                    {{partnerRegistration.school.shifts.night.firstToThird}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.firstToThird > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.night.firstToThird }">
+                    {{partnerRegistration.school.shifts.night.firstToThird || 0}}
                   </span>
                   alunos e
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.firstToThirdTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.night.firstToThirdTeachers == 0,  }">
-                    {{partnerRegistration.school.shifts.night.firstToThirdTeachers}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.firstToThirdTeachers > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.night.firstToThirdTeachers }">
+                    {{partnerRegistration.school.shifts.night.firstToThirdTeachers || 0}}
                   </span>
                     professores
                 </li>
                 <li>
                   <strong>EJA</strong><br>
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.eja > 0, 'has-text-grey-light': partnerRegistration.school.shifts.night.eja == 0,  }">
-                    {{partnerRegistration.school.shifts.night.eja}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.eja > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.night.eja }">
+                    {{partnerRegistration.school.shifts.night.eja || 0}}
                   </span>
                   alunos e
-                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.ejaTeachers > 0, 'has-text-grey-light': partnerRegistration.school.shifts.night.ejaTeachers == 0,  }">
-                    {{partnerRegistration.school.shifts.night.ejaTeachers}}
+                  <span class="has-text-weight-semibold" :class="{ 'has-text-primary': partnerRegistration.school.shifts.night.ejaTeachers > 0, 'has-text-grey-light': !partnerRegistration.school.shifts.night.ejaTeachers }">
+                    {{partnerRegistration.school.shifts.night.ejaTeachers || 0}}
                   </span>
                     professores
                 </li>
