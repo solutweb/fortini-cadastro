@@ -18,7 +18,7 @@ const router = new Router({
       name: 'ViewForm',
       component: ViewForm,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
       }
     },
     {
