@@ -255,21 +255,7 @@
 
 <script>
 import MaskedInput from 'vue-text-mask'
-import firebase from 'firebase'
-
-let config = {
-  apiKey: 'AIzaSyA_vU1K13d8EMpahiRPkYguhA3YOeCZcDc',
-  authDomain: 'cadastro-da-escola.firebaseapp.com',
-  databaseURL: 'https://cadastro-da-escola.firebaseio.com',
-  projectId: 'cadastro-da-escola',
-  storageBucket: 'cadastro-da-escola.appspot.com',
-  messagingSenderId: '873838200049'
-}
-
-let app = firebase.initializeApp(config)
-let db = app.database()
-
-let schoolRegistration = db.ref('inscription')
+import { schoolRegistration, firebaseApp } from '../firebase'
 
 export default {
   name: 'RegisterForm',
@@ -283,6 +269,7 @@ export default {
 
   data () {
     return {
+      timeStamp: '',
       responsible: {
         full_name: '',
         phone: '',
@@ -408,21 +395,37 @@ export default {
 
       return true
     },
-    submitSchool: function () {
-      if (this.validateForm()) {
-        const school = {
-          responsible: this.responsible,
-          school: this.school
+    validateShifts: function () {
+      let morningCount = 0
+      Object.keys(this.school.shifts.morning).forEach(morningShifts => {
+        if (morningShifts != 'enabled' && morningShifts != 'filled') {
+          this.school.shifts.morning[morningShifts] > 0 ? morningCount += 1 : morningCount = morningCount
         }
+      })
+      morningCount > 0 ? this.school.shifts.morning.filled = true : this.school.shifts.morning.filled = false
 
-        if (schoolRegistration.push(school)) {
-          this.errorMessage = null
-          this.successMessage = 'O cadastro foi efetuado com sucesso. Em breve você receberá uma confirmação por e-mail.'
-        } else {
-          this.successMessage = null
-          this.errorMessage = 'Ocorreu um erro ao tentar enviar o cadastro. Por favor tente novamente nos próximos minutos.'
+      let afternoonCount = 0
+      Object.keys(this.school.shifts.afternoon).forEach(afternoonShifts => {
+        if (afternoonShifts != 'enabled' && afternoonShifts != 'filled') {
+          this.school.shifts.afternoon[afternoonShifts] > 0 ? afternoonCount += 1 : afternoonCount = afternoonCount
         }
+      })
+
+      if (!this.school.shifts.morning.filled) {
+        afternoonCount > 0 ? this.school.shifts.afternoon.filled = true : this.school.shifts.afternoon.filled = false
       }
+
+      let nightCount = 0
+      Object.keys(this.school.shifts.night).forEach(nightShifts => {
+        if (nightShifts != 'enabled' && nightShifts != 'filled') {
+          this.school.shifts.night[nightShifts] > 0 ? nightCount += 1 : nightCount = nightCount
+        }
+      })
+      if (!this.school.shifts.afternoon.filled) {
+        nightCount > 0 ? this.school.shifts.night.filled = true : this.school.shifts.night.filled = false
+      }
+
+      return (this.school.shifts.morning.filled || this.school.shifts.afternoon.filled || this.school.shifts.night.filled)
     },
     validatePhone: function (source, phone) {
       let phoneNumber = phone.match(/\d/g)
@@ -460,8 +463,10 @@ export default {
         !mailValidation.test(mail) ? this.school.viceDirector.validMail = false : this.school.viceDirector.validMail = true
       }
     },
-    getYear: function () {
-      return (new Date().getUTCFullYear())
+    getTimeStamp: function () {
+      const time = new Date().toLocaleTimeString('pt-BR')
+      const date = new Date().toLocaleDateString('pt-BR')
+      return (`${date} às ${time}`)
     },
     phoneMask: function (value) {
       let phone = value.match(/\d/g)
@@ -475,163 +480,81 @@ export default {
       } else {
         return ['(', /[1-9]/, /[1-9]/, ')', ' ', /\d/, /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, /\d/, /\d/]
       }
+    },
+    submitSchool: function () {
+      this.timeStamp = this.getTimeStamp()
+      this.validateShifts()
+      if (this.validateForm()) {
+        const school = {
+          responsible: this.responsible,
+          school: this.school,
+          timeStamp: this.timeStamp
+        }
+
+        firebaseApp.auth().signInAnonymously()
+          .catch(error => {
+            const errorCode = error.code
+            const errorMessage = error.message
+
+            this.errorMessage = `Ocorreu um erro: (${errorCode}) ${errorMessage}`
+          })
+
+        firebaseApp.auth().onAuthStateChanged(user => {
+          if (user) {
+            if (schoolRegistration.push(school)) {
+              this.errorMessage = null
+              this.successMessage = 'O cadastro foi efetuado com sucesso. Em breve você receberá uma confirmação por e-mail.'
+            } else {
+              this.successMessage = null
+              this.errorMessage = 'Ocorreu um erro ao tentar enviar o cadastro. Por favor tente novamente nos próximos minutos.'
+            }
+          }
+        })
+      }
     }
   },
-  watch: {
-    'school.shifts.morning': {
-      handler: function () {
-        if (this.school.shifts.morning.firstToFifth && this.school.shifts.morning.firsttoFifthTeachers && this.school.shifts.morning.firstToThird && this.school.shifts.morning.firstToThirdTeachers && this.school.shifts.morning.sixthToNinth && this.school.shifts.morning.sixthToNinthTeachers && this.school.shifts.morning.eja && this.school.shifts.morning.ejaTeachers) {
-          this.school.shifts.morning.filled = true
-        } else {
-          this.school.shifts.morning.filled = false
-        }
-      },
-      deep: true
-    },
-    'school.shifts.afternoon': {
-      handler: function () {
-        if (this.school.shifts.afternoon.firstToFifth && this.school.shifts.afternoon.firsttoFifthTeachers && this.school.shifts.afternoon.firstToThird && this.school.shifts.afternoon.firstToThirdTeachers && this.school.shifts.afternoon.sixthToNinth && this.school.shifts.afternoon.sixthToNinthTeachers && this.school.shifts.afternoon.eja && this.school.shifts.afternoon.ejaTeachers) {
-          this.school.shifts.afternoon.filled = true
-        } else {
-          this.school.shifts.afternoon.filled = false
-        }
-      },
-      deep: true
-    },
-    'school.shifts.night': {
-      handler: function () {
-        if (this.school.shifts.night.firstToFifth && this.school.shifts.night.firsttoFifthTeachers && this.school.shifts.night.firstToThird && this.school.shifts.night.firstToThirdTeachers && this.school.shifts.night.sixthToNinth && this.school.shifts.night.sixthToNinthTeachers && this.school.shifts.night.eja && this.school.shifts.night.ejaTeachers) {
-          this.school.shifts.night.filled = true
-        } else {
-          this.school.shifts.night.filled = false
-        }
-      },
-      deep: true
-    }
-  }
+  // watch: {
+  //   'school.shifts.morning': {
+  //     handler: function () {
+  //       if (this.school.shifts.morning.firstToFifth && this.school.shifts.morning.firsttoFifthTeachers && this.school.shifts.morning.firstToThird && this.school.shifts.morning.firstToThirdTeachers && this.school.shifts.morning.sixthToNinth && this.school.shifts.morning.sixthToNinthTeachers && this.school.shifts.morning.eja && this.school.shifts.morning.ejaTeachers) {
+  //         this.school.shifts.morning.filled = true
+  //       } else {
+  //         this.school.shifts.morning.filled = false
+  //       }
+  //     },
+  //     deep: true
+  //   },
+  //   'school.shifts.afternoon': {
+  //     handler: function () {
+  //       if (this.school.shifts.afternoon.firstToFifth && this.school.shifts.afternoon.firsttoFifthTeachers && this.school.shifts.afternoon.firstToThird && this.school.shifts.afternoon.firstToThirdTeachers && this.school.shifts.afternoon.sixthToNinth && this.school.shifts.afternoon.sixthToNinthTeachers && this.school.shifts.afternoon.eja && this.school.shifts.afternoon.ejaTeachers) {
+  //         this.school.shifts.afternoon.filled = true
+  //       } else {
+  //         this.school.shifts.afternoon.filled = false
+  //       }
+  //     },
+  //     deep: true
+  //   },
+  //   'school.shifts.night': {
+  //     handler: function () {
+  //       this.validateShifts()
+  //       if (this.school.shifts.night.filled) {
+  //         console.log('Preencheu algo')
+  //         return
+  //       }
+  //       console.log('nada consta')
+  //       // if (this.school.shifts.night.firstToFifth && this.school.shifts.night.firsttoFifthTeachers && this.school.shifts.night.firstToThird && this.school.shifts.night.firstToThirdTeachers && this.school.shifts.night.sixthToNinth && this.school.shifts.night.sixthToNinthTeachers && this.school.shifts.night.eja && this.school.shifts.night.ejaTeachers) {
+  //       //   this.school.shifts.night.filled = true
+  //       // } else {
+  //       //   this.school.shifts.night.filled = false
+  //       // }
+  //     },
+  //     deep: true
+  //   }
+  // }
 }
 </script>
 
 <style lang="scss" scoped>
-// School shifts: Morning, Afternoon and Night
-.shift {
-  border-bottom: 0;
-  border-radius: 4px;
-  -webkit-transition: all 2.0s ease, max-height 0.60s ease-out;
-  -moz-transition: all 2.0s ease, max-height 0.60s ease-out;
-  -ms-transition: all 2.0s ease, max-height 0.60s ease-out;
-  -o-transition: all 2.0s ease, max-height 0.60s ease-out;
-  transition: all 2.0s ease, max-height 0.60s ease-out;
-  overflow: hidden;
-
-  .time {
-    width: 96px;
-    height: 96px;
-    margin: 0 auto;
-    border-radius: 50%;
-    padding: 15px;
-    cursor: pointer;
-
-    &:hover {
-      opacity: 0.8;
-      border: 1px solid #EEE;
-    }
-
-    .img-label {
-      display: block;
-      font-family: 'Satisfy', sans-serif;
-      font-size: 20px;
-      margin: 15px auto;
-      text-align: center;
-    }
-  }
-
-  .time-morning,
-  .time-afternoon,
-  .time-night {
-    visibility: hidden;
-    opacity: 0;
-    max-height: 0;
-    margin-top: 35px;
-    padding: 20px;
-    border: 1px solid #E5E5E5;
-    border-left: 0;
-    border-right: 0;
-    -webkit-transition: all 2.0s ease, max-height 0.60s ease-out;
-    -moz-transition: all 2.0s ease, max-height 0.60s ease-out;
-    -ms-transition: all 2.0s ease, max-height 0.60s ease-out;
-    -o-transition: all 2.0s ease, max-height 0.60s ease-out;
-    transition: all 2.0s ease, max-height 0.60s ease-out;
-    overflow: hidden;
-
-    ul {
-      margin: -20px;
-
-      li {
-        text-align: center;
-        padding: 10px;
-        border-bottom: 1px solid #E5E5E5;
-        border-left: 0;
-        border-right: 0;
-
-        &:nth-last-child(1) {
-          border-bottom: 0;
-        }
-      }
-    }
-
-    .and {
-      margin-left: 10px;
-    }
-  }
-
-  &.active {
-    margin-top: -1px;
-    border: 1px solid #E5E5E5;
-    border-bottom: 0;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-
-    .time {
-      filter: none;
-
-      &:hover {
-        opacity: 0.8;
-        border: none;
-      }
-    }
-
-    .time-morning,
-    .time-afternoon,
-    .time-night {
-      visibility: visible;
-      opacity: 1;
-      max-height: 460px;
-    }
-
-    &.filled {
-      border: 1px solid #24dbdd;
-      border-bottom: 0;
-      box-shadow: 0 0 15px rgba(36,219,221, 0.4);
-
-      .time-morning,
-      .time-afternoon,
-      .time-night {
-        border: 1px solid #24dbdd;
-        border-left: 0;
-        border-right: 0;
-        border-bottom: 0;
-        ul {
-          li {
-            border-bottom: 1px solid #24dbdd;
-            border-left: 0;
-            border-right: 0;
-          }
-        }
-      }
-    }
-  }
-}
-
 // Question label
 .question-label {
   font-family: 'Satisfy', sans-serif;
