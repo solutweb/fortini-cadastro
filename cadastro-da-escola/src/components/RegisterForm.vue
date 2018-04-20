@@ -503,7 +503,8 @@ export default {
           if (user) {
             if (schoolRegistration.push(school)) {
               this.errorMessage = null
-              this.successMessage = 'O cadastro foi efetuado com sucesso. Em breve você receberá uma confirmação por e-mail.'
+              this.successMessage = 'O cadastro foi efetuado com sucesso. Em breve entraremos em contato.'
+              // this.successMessage = 'O cadastro foi efetuado com sucesso. Em breve você receberá uma confirmação por e-mail.'
             } else {
               this.successMessage = null
               this.errorMessage = 'Ocorreu um erro ao tentar enviar o cadastro. Por favor tente novamente nos próximos minutos.'
