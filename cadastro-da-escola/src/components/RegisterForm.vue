@@ -18,14 +18,14 @@
               </div>
               <div class="column is-4">
                 <div class="form-group">
-                  <label for="responsiblePhone" class="smaller-text" :class="{ 'up-label': responsible.phone, invalid: !responsible.validPhone }">{{phoneLabel}}</label>
-                  <masked-input type="text" :guide="true" :placeholderChar="'\u2000'" :mask="phoneMask(responsible.phone)" :class="{ filled: responsible.phone }" id="responsiblePhone" name="responsiblePhone" v-model="responsible.phone" :placeholder="phoneLabel" @blur="validatePhone('responsible', responsible.phone)"></masked-input>
+                  <label for="responsiblePhone" class="smaller-text" :class="{ 'up-label': responsible.phone, invalid: !validatePhone('responsible', responsible.phone) }">{{phoneLabel}}</label>
+                  <the-mask :mask="['(##) ####.####', '(##) #####.####']" :masked="true" :class="{ filled: responsible.phone }" id="responsiblePhone" name="responsiblePhone" v-model="responsible.phone" :placeholder="phoneLabel" />
                 </div>
               </div>
               <div class="column is-4">
                 <div class="form-group">
-                  <label for="responsibleMail" class="smaller-text" :class="{ 'up-label': responsible.mail, invalid: !responsible.validMail }">{{mailLabel}}</label>
-                  <input type="text" :class="{ filled: responsible.mail, invalid: !responsible.validMail }" id="responsibleMail" name="responsibleMail" v-model="responsible.mail" :placeholder="mailLabel" @blur="validateMail('responsible', responsible.mail)">
+                  <label for="responsibleMail" class="smaller-text" :class="{ 'up-label': responsible.mail, invalid: !validateMail('responsible', responsible.mail) }">{{mailLabel}}</label>
+                  <input type="text" :class="{ filled: responsible.mail, invalid: !validateMail('responsible', responsible.mail) }" id="responsibleMail" name="responsibleMail" v-model="responsible.mail" :placeholder="mailLabel">
                 </div>
               </div>
             </div>
@@ -36,16 +36,22 @@
                   <input type="text" :class="{ filled: school.full_name }" id="school" name="school" v-model="school.full_name" :placeholder="schoolLabel">
                 </div>
               </div>
-              <div class="column is-4">
+              <div class="column is-2">
                 <div class="form-group">
-                  <label for="school-phone" class="smaller-text" :class="{ 'up-label': school.phone, invalid: !school.validPhone }">{{phoneLabel}}</label>
-                  <masked-input type="text" :guide="true" :placeholderChar="'\u2000'" :mask="phoneMask(school.phone)" :class="{ filled: school.phone }" id="school-phone" name="school-phone" v-model="school.phone" :placeholder="phoneLabel" @blur="validatePhone('school', school.phone)"></masked-input>
+                  <label for="school-cnpj" class="smaller-text" :class="{ 'up-label': school.cnpj, invalid: !cnpjValidAndUnique }">{{cnpjLabel}}</label>
+                  <the-mask :mask="['##.###.###/####-##']" :masked="true" :class="{ filled: school.cnpj }" id="school-cnpj" name="school-cnpj" v-model="school.cnpj" :placeholder="cnpjLabel" @blur.native="validateCNPJ(school.cnpj)" />
+                </div>
+              </div>
+              <div class="column is-2">
+                <div class="form-group">
+                  <label for="school-phone" class="smaller-text" :class="{ 'up-label': school.phone, invalid: !validatePhone('school', school.phone) }">{{phoneLabel}}</label>
+                  <the-mask :mask="['(##) ####.####', '(##) #####.####']" :masked="true" :class="{ filled: school.phone }" id="school-phone" name="school-phone" v-model="school.phone" :placeholder="phoneLabel" />
                 </div>
               </div>
               <div class="column is-4">
                 <div class="form-group">
-                  <label for="school-mail" class="smaller-text" :class="{ 'up-label': school.mail, invalid: !school.validMail }">{{mailLabel}}</label>
-                  <input type="text" :class="{ filled: school.mail, invalid: !school.validMail }" id="school-mail" name="school-mail" v-model="school.mail" :placeholder="mailLabel" @blur="validateMail('school', school.mail)">
+                  <label for="school-mail" class="smaller-text" :class="{ 'up-label': school.mail, invalid: !validateMail('school', school.mail) }">{{mailLabel}}</label>
+                  <input type="text" :class="{ filled: school.mail, invalid: !validateMail('school', school.mail) }" id="school-mail" name="school-mail" v-model="school.mail" :placeholder="mailLabel">
                 </div>
               </div>
             </div>
@@ -58,14 +64,14 @@
               </div>
               <div class="column is-4">
                 <div class="form-group">
-                  <label for="school-director-phone" class="smaller-text" :class="{ 'up-label': school.director.phone, invalid: !school.director.validPhone }">{{phoneLabel}}</label>
-                  <masked-input type="text" :guide="true" :placeholderChar="'\u2000'" :mask="phoneMask(school.director.phone)" :class="{ filled: school.director.phone }" id="school-director-phone" name="school-director-phone" v-model="school.director.phone" :placeholder="phoneLabel" @blur="validatePhone('director', school.director.phone)"></masked-input>
+                  <label for="school-director-phone" class="smaller-text" :class="{ 'up-label': school.director.phone, invalid: !validatePhone('director', school.director.phone) }">{{phoneLabel}}</label>
+                  <the-mask :mask="['(##) ####.####', '(##) #####.####']" :masked="true" :class="{ filled: school.director.phone }" id="school-director-phone" name="school-director-phone" v-model="school.director.phone" :placeholder="phoneLabel" />
                 </div>
               </div>
               <div class="column is-4">
                 <div class="form-group">
-                  <label for="school-director-mail" class="smaller-text" :class="{ 'up-label': school.director.mail, invalid: !school.director.validMail }">{{mailLabel}}</label>
-                  <input type="text" :class="{ filled: school.director.mail, invalid: !school.director.validMail }" id="school-director-mail" name="school-director-mail" v-model="school.director.mail" :placeholder="mailLabel" @blur="validateMail('director', school.director.mail)">
+                  <label for="school-director-mail" class="smaller-text" :class="{ 'up-label': school.director.mail, invalid: !validateMail('director', school.director.mail) }">{{mailLabel}}</label>
+                  <input type="text" :class="{ filled: school.director.mail, invalid: !validateMail('director', school.director.mail) }" id="school-director-mail" name="school-director-mail" v-model="school.director.mail" :placeholder="mailLabel">
                 </div>
               </div>
             </div>
@@ -78,14 +84,14 @@
               </div>
               <div class="column is-4">
                 <div class="form-group">
-                  <label for="school-vice-director-phone" class="smaller-text" :class="{ 'up-label': school.viceDirector.phone, invalid: !school.director.validPhone }">{{phoneLabel}}</label>
-                  <masked-input type="text" :guide="true" :placeholderChar="'\u2000'" :mask="phoneMask(school.viceDirector.phone)" :class="{ filled: school.viceDirector.phone }" id="school-vice-director-phone" name="school-vice-director-phone" v-model="school.viceDirector.phone" :placeholder="phoneLabel" @blur="validatePhone('viceDirector', school.viceDirector.phone)"></masked-input>
+                  <label for="school-vice-director-phone" class="smaller-text" :class="{ 'up-label': school.viceDirector.phone, invalid: !validatePhone('viceDirector', school.viceDirector.phone) }">{{phoneLabel}}</label>
+                  <the-mask :mask="['(##) ####.####', '(##) #####.####']" :masked="true" :class="{ filled: school.viceDirector.phone }" id="school-vice-director-phone" name="school-vice-director-phone" v-model="school.viceDirector.phone" :placeholder="phoneLabel" />
                 </div>
               </div>
               <div class="column is-4">
                 <div class="form-group">
-                  <label for="viceDirector" class="smaller-text" :class="{ 'up-label': school.viceDirector.mail, invalid: !school.viceDirector.validMail }">{{mailLabel}}</label>
-                  <input type="text" :class="{ filled: school.viceDirector.mail, invalid: !school.viceDirector.validMail }" id="schoolDirectorMail" name="viceDirector" v-model="school.viceDirector.mail" :placeholder="mailLabel" @blur="validateMail('viceDirector', school.viceDirector.mail)">
+                  <label for="viceDirector" class="smaller-text" :class="{ 'up-label': school.viceDirector.mail, invalid: !validateMail('viceDirector', school.viceDirector.mail) }">{{mailLabel}}</label>
+                  <input type="text" :class="{ filled: school.viceDirector.mail, invalid: !validateMail('viceDirector', school.viceDirector.mail) }" id="schoolDirectorMail" name="viceDirector" v-model="school.viceDirector.mail" :placeholder="mailLabel">
                 </div>
               </div>
             </div>
@@ -254,17 +260,17 @@
 </template>
 
 <script>
-import MaskedInput from 'vue-text-mask'
+import {TheMask} from 'vue-the-mask'
 import { schoolRegistration, firebaseApp } from '../firebase'
 
 export default {
   name: 'RegisterForm',
   firebase: {
-    registration: schoolRegistration
+    registrations: schoolRegistration
   },
 
   components: {
-    MaskedInput
+    TheMask
   },
 
   data () {
@@ -273,29 +279,22 @@ export default {
       responsible: {
         full_name: '',
         phone: '',
-        validPhone: true,
-        mail: '',
-        validMail: true
+        mail: ''
       },
       school: {
+        cnpj: '',
         full_name: '',
         phone: '',
-        validPhone: true,
         mail: '',
-        validMail: true,
         director: {
           full_name: '',
           phone: '',
-          validPhone: true,
-          mail: '',
-          validMail: true
+          mail: ''
         },
         viceDirector: {
           full_name: '',
           phone: '',
-          validPhone: true,
-          mail: '',
-          validMail: true
+          mail: ''
         },
         form: {
           project: '',
@@ -343,6 +342,7 @@ export default {
       },
       responsibleLabel: 'Nome completo da pessoa responsável pelo contato',
       schoolLabel: 'Nome completo da escola',
+      cnpjLabel: 'CNPJ da escola',
       directorLabel: 'Nome completo do diretor da escola',
       viceDirectorLabel: 'Nome completo do vice-diretor da escola',
       phoneLabel: 'Respectivo telefone',
@@ -351,7 +351,9 @@ export default {
       availabilityLabel: 'Responda aqui',
       suggestionLabel: 'Responda aqui',
       errorMessage: null,
-      successMessage: null
+      successMessage: null,
+      cnpjValidAndUnique: false,
+      isLogged: false
     }
   },
   methods: {
@@ -361,23 +363,28 @@ export default {
     },
     validateForm: function () {
       // Validate contacts information
-      if (!this.responsible.full_name || !this.responsible.phone || !this.responsible.mail || !this.responsible.validMail) {
-        this.errorMessage = 'Por favor preencha todos os campos do formulário.'
+      if (!this.responsible.full_name || !this.responsible.phone || !this.responsible.mail || !this.validateMail('responsible', this.responsible.mail)) {
+        this.errorMessage = 'Por favor preencha todos os campos do formulário corretamente.'
         return false
       }
 
-      if (!this.school.full_name || !this.school.phone || !this.school.mail || !this.school.validMail) {
-        this.errorMessage = 'Por favor preencha todos os campos do formulário.'
+      if (!this.school.full_name || !this.school.phone || !this.school.mail || !this.validateMail('school', this.school.mail) || !this.school.cnpj) {
+        this.errorMessage = 'Por favor preencha todos os campos do formulário corretamente.'
         return false
       }
 
-      if (!this.school.director.full_name || !this.school.director.phone || !this.school.director.mail || !this.school.director.validMail) {
-        this.errorMessage = 'Por favor preencha todos os campos do formulário.'
+      if (!this.validateCNPJ(this.school.cnpj)) {
+        this.errorMessage = 'Este CNPJ já está cadastrado. Se não foi você quem cadastrou ou se deseja atualizar alguma informação, por favor entre em contato através do telefone (31) 99229.6485 (Maiara) ou maiara@fortini.com.br.'
         return false
       }
 
-      if (!this.school.viceDirector.full_name || !this.school.viceDirector.phone || !this.school.viceDirector.mail || !this.school.viceDirector.validMail) {
-        this.errorMessage = 'Por favor preencha todos os campos do formulário.'
+      if (!this.school.director.full_name || !this.school.director.phone || !this.school.director.mail || !this.validateMail('director', this.school.director.mail)) {
+        this.errorMessage = 'Por favor preencha todos os campos do formulário corretamente.'
+        return false
+      }
+
+      if (!this.school.viceDirector.full_name || !this.school.viceDirector.phone || !this.school.viceDirector.mail || !this.validateMail('viceDirector', this.school.viceDirector.mail)) {
+        this.errorMessage = 'Por favor preencha todos os campos do formulário corretamente.'
         return false
       }
 
@@ -398,34 +405,78 @@ export default {
     validateShifts: function () {
       let morningCount = 0
       Object.keys(this.school.shifts.morning).forEach(morningShifts => {
-        if (morningShifts != 'enabled' && morningShifts != 'filled') {
-          this.school.shifts.morning[morningShifts] > 0 ? morningCount += 1 : morningCount = morningCount
+        if (morningShifts !== 'enabled' && morningShifts !== 'filled') {
+          if (this.school.shifts.morning[morningShifts] > 0) {
+            morningCount += 1
+          }
         }
       })
+
       morningCount > 0 ? this.school.shifts.morning.filled = true : this.school.shifts.morning.filled = false
 
       let afternoonCount = 0
       Object.keys(this.school.shifts.afternoon).forEach(afternoonShifts => {
-        if (afternoonShifts != 'enabled' && afternoonShifts != 'filled') {
-          this.school.shifts.afternoon[afternoonShifts] > 0 ? afternoonCount += 1 : afternoonCount = afternoonCount
+        if (afternoonShifts !== 'enabled' && afternoonShifts !== 'filled') {
+          if (this.school.shifts.afternoon[afternoonShifts] > 0) {
+            afternoonCount += 1
+          }
         }
       })
 
-      if (!this.school.shifts.morning.filled) {
-        afternoonCount > 0 ? this.school.shifts.afternoon.filled = true : this.school.shifts.afternoon.filled = false
-      }
+      afternoonCount > 0 ? this.school.shifts.afternoon.filled = true : this.school.shifts.afternoon.filled = false
 
       let nightCount = 0
       Object.keys(this.school.shifts.night).forEach(nightShifts => {
-        if (nightShifts != 'enabled' && nightShifts != 'filled') {
-          this.school.shifts.night[nightShifts] > 0 ? nightCount += 1 : nightCount = nightCount
+        if (nightShifts !== 'enabled' && nightShifts !== 'filled') {
+          if (this.school.shifts.night[nightShifts] > 0) {
+            nightCount += 1
+          }
         }
       })
-      if (!this.school.shifts.afternoon.filled) {
-        nightCount > 0 ? this.school.shifts.night.filled = true : this.school.shifts.night.filled = false
-      }
+
+      nightCount > 0 ? this.school.shifts.night.filled = true : this.school.shifts.night.filled = false
 
       return (this.school.shifts.morning.filled || this.school.shifts.afternoon.filled || this.school.shifts.night.filled)
+    },
+    validateCNPJ: function (cnpj) {
+      const repeatedCnpj = this.registrations.filter(registration => {
+        return (registration.school.cnpj === this.school.cnpj)
+      })
+
+      if (repeatedCnpj.length > 0) {
+        this.cnpjValidAndUnique = false
+        this.errorMessage = 'Este CNPJ já está cadastrado. Se não foi você quem cadastrou ou se deseja atualizar alguma informação, por favor entre em contato através do telefone (31) 99229.6485 (Maiara) ou maiara@fortini.com.br.'
+        return false
+      }
+
+      const b = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2]
+      let i = 0
+      let n = 0
+
+      if ((cnpj = cnpj.replace(/[^\d]/g, '')).length !== 14) {
+        this.cnpjValidAndUnique = false
+        return false
+      }
+
+      if (/0{14}/.test(cnpj)) {
+        this.cnpjValidAndUnique = false
+        return false
+      }
+
+      for (i = 0, n = 0; i < 12; n += cnpj[i] * b[++i]);
+      if (Number(cnpj[12]) !== (((n %= 11) < 2) ? 0 : 11 - n)) {
+        this.cnpjValidAndUnique = false
+        return false
+      }
+
+      for (i = 0, n = 0; i <= 12; n += cnpj[i] * b[i++]);
+      if (Number(cnpj[13]) !== (((n %= 11) < 2) ? 0 : 11 - n)) {
+        this.cnpjValidAndUnique = false
+        return false
+      }
+
+      this.cnpjValidAndUnique = true
+      return true
     },
     validatePhone: function (source, phone) {
       let phoneNumber = phone.match(/\d/g)
@@ -435,32 +486,34 @@ export default {
       }
 
       if (source === 'responsible') {
-        phoneLength < 10 ? this.responsible.validPhone = false : this.responsible.validPhone = true
+        return !(phoneLength < 10)
       }
       if (source === 'school') {
-        phoneLength < 10 ? this.school.validPhone = false : this.school.validPhone = true
+        return !(phoneLength < 10)
       }
       if (source === 'director') {
-        phoneLength < 10 ? this.school.director.validPhone = false : this.school.director.validPhone = true
+        return !(phoneLength < 10)
       }
       if (source === 'viceDirector') {
-        phoneLength < 10 ? this.school.viceDirector.validPhone = false : this.school.viceDirector.validPhone = true
+        return !(phoneLength < 10)
       }
+
+      // todo Corrigir validação de phone e substituir componente mask pelo the-vue-mask
     },
     validateMail: function (source, mail) {
       let mailValidation = /^(([^<>()\]\\.,;:\s@"]+(\.[^<>()\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
       if (source === 'responsible') {
-        !mailValidation.test(mail) ? this.responsible.validMail = false : this.responsible.validMail = true
+        return mailValidation.test(mail)
       }
       if (source === 'school') {
-        !mailValidation.test(mail) ? this.school.validMail = false : this.school.validMail = true
+        return mailValidation.test(mail)
       }
       if (source === 'director') {
-        !mailValidation.test(mail) ? this.school.director.validMail = false : this.school.director.validMail = true
+        return mailValidation.test(mail)
       }
       if (source === 'viceDirector') {
-        !mailValidation.test(mail) ? this.school.viceDirector.validMail = false : this.school.viceDirector.validMail = true
+        return mailValidation.test(mail)
       }
     },
     getTimeStamp: function () {
@@ -491,6 +544,19 @@ export default {
           timeStamp: this.timeStamp
         }
 
+        firebaseApp.auth().onAuthStateChanged(user => {
+          if (user) {
+            if (schoolRegistration.push(school)) {
+              this.errorMessage = null
+              this.successMessage = 'O cadastro foi efetuado com sucesso. Em breve entraremos em contato.'
+              return
+              // this.successMessage = 'O cadastro foi efetuado com sucesso. Em breve você receberá uma confirmação por e-mail.'
+            }
+            this.successMessage = null
+            this.errorMessage = 'Ocorreu um erro ao tentar enviar o cadastro. Por favor tente novamente nos próximos minutos.'
+          }
+        })
+
         firebaseApp.auth().signInAnonymously()
           .catch(error => {
             const errorCode = error.code
@@ -498,22 +564,9 @@ export default {
 
             this.errorMessage = `Ocorreu um erro: (${errorCode}) ${errorMessage}`
           })
-
-        firebaseApp.auth().onAuthStateChanged(user => {
-          if (user) {
-            if (schoolRegistration.push(school)) {
-              this.errorMessage = null
-              this.successMessage = 'O cadastro foi efetuado com sucesso. Em breve entraremos em contato.'
-              // this.successMessage = 'O cadastro foi efetuado com sucesso. Em breve você receberá uma confirmação por e-mail.'
-            } else {
-              this.successMessage = null
-              this.errorMessage = 'Ocorreu um erro ao tentar enviar o cadastro. Por favor tente novamente nos próximos minutos.'
-            }
-          }
-        })
       }
     }
-  },
+  }
   // watch: {
   //   'school.shifts.morning': {
   //     handler: function () {

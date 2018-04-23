@@ -8,7 +8,7 @@
         <div class="field">
           <div class="control has-icons-left">
             <div class="select" :class="{ 'is-loading' : loading }">
-              <select v-model="partnerRegistration" @change="onSelectSchool()">
+              <select v-model="partnerRegistration">
                 <option selected hidden disabled :value="null" v-if="loading">Carregando..</option>
                 <option selected hidden disabled :value="null" v-else>Clique para escolher</option>
                 <option v-for="registration of registrations" v-bind:key="registration['.key']" v-bind:value="registration">
@@ -31,7 +31,7 @@
             {{partnerRegistration.school.full_name}}
           </h1>
           <h2 class="subtitle">
-            Cadastro da Escola Parceira
+            {{partnerRegistration.school.cnpj || 'Cadastro da Escola Parceira'}}
           </h2>
         </div>
       </div>
@@ -46,25 +46,25 @@
     <div class="container is-fluid" v-if="partnerRegistration && partnerRegistration.responsible">
       <!-- Responsável -->
       <div class="columns margin-bottom">
-        <div class="column">
+        <div class="column is-4">
           <div class="field">
             <div class="control">
               <label class="label">Responsável pelo contato</label>
-              <span>{{partnerRegistration.responsible.full_name}}</span>
+              <span class="limit-text" :title="partnerRegistration.responsible.full_name">{{partnerRegistration.responsible.full_name}}</span>
             </div>
           </div>
         </div>
 
-        <div class="column">
+        <div class="column is-3">
           <div class="field">
             <div class="control">
               <label class="label">E-mail</label>
-              <span>{{partnerRegistration.responsible.mail}}</span>
+              <span class="limit-text" :title="partnerRegistration.responsible.mail">{{partnerRegistration.responsible.mail}}</span>
             </div>
           </div>
         </div>
 
-        <div class="column">
+        <div class="column is-2">
           <div class="field">
             <div class="control">
               <label class="label">Telefone</label>
@@ -76,25 +76,34 @@
 
       <!-- Escola - Informações básicas -->
       <div class="columns">
-        <div class="column">
+        <div class="column is-4">
           <div class="field">
             <div class="control">
               <label class="label">Nome da escola</label>
-              <span>{{partnerRegistration.school.full_name}}</span>
+              <span class="limit-text" :title="partnerRegistration.school.full_name">{{partnerRegistration.school.full_name}}</span>
             </div>
           </div>
         </div>
 
-        <div class="column">
+        <div class="column is-3">
           <div class="field">
             <div class="control">
               <label class="label">E-mail da escola</label>
-              <span>{{partnerRegistration.school.mail}}</span>
+              <span class="limit-text" :title="partnerRegistration.school.mail">{{partnerRegistration.school.mail}}</span>
             </div>
           </div>
         </div>
 
-        <div class="column">
+        <div class="column is-2" v-if="partnerRegistration.school && partnerRegistration.school.cnpj">
+          <div class="field">
+            <div class="control">
+              <label class="label">CNPJ da escola</label>
+              <span>{{partnerRegistration.school.cnpj}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="column is-2">
           <div class="field">
             <div class="control">
               <label class="label">Telefone da escola</label>
@@ -106,25 +115,25 @@
 
       <!-- Escola - Diretor -->
       <div class="columns">
-        <div class="column">
+        <div class="column is-4">
           <div class="field">
             <div class="control">
               <label class="label">Nome do diretor</label>
-              <span>{{partnerRegistration.school.director.full_name}}</span>
+              <span class="limit-text" :title="partnerRegistration.school.director.full_name">{{partnerRegistration.school.director.full_name}}</span>
             </div>
           </div>
         </div>
 
-        <div class="column">
+        <div class="column is-3">
           <div class="field">
             <div class="control">
               <label class="label">E-mail do diretor</label>
-              <span>{{partnerRegistration.school.director.mail}}</span>
+              <span class="limit-text" :title="partnerRegistration.school.director.mail">{{partnerRegistration.school.director.mail}}</span>
             </div>
           </div>
         </div>
 
-        <div class="column">
+        <div class="column is-2">
           <div class="field">
             <div class="control">
               <label class="label">Telefone do diretor</label>
@@ -136,25 +145,25 @@
 
       <!-- Escola - Vice-diretor -->
       <div class="columns margin-bottom">
-        <div class="column">
+        <div class="column is-4">
           <div class="field">
             <div class="control">
               <label class="label">Nome do vice-diretor</label>
-              <span>{{partnerRegistration.school.viceDirector.full_name}}</span>
+              <span class="limit-text" :title="partnerRegistration.school.viceDirector.full_name">{{partnerRegistration.school.viceDirector.full_name}}</span>
             </div>
           </div>
         </div>
 
-        <div class="column">
+        <div class="column is-3">
           <div class="field">
             <div class="control">
               <label class="label">E-mail do vice-diretor</label>
-              <span>{{partnerRegistration.school.viceDirector.mail}}</span>
+              <span class="limit-text" :title="partnerRegistration.school.viceDirector.mail">{{partnerRegistration.school.viceDirector.mail}}</span>
             </div>
           </div>
         </div>
 
-        <div class="column">
+        <div class="column is-2">
           <div class="field">
             <div class="control">
               <label class="label">Telefone do vice-diretor</label>
@@ -368,7 +377,6 @@ import { schoolRegistration } from '../firebase'
 
 export default {
   name: 'ViewForm',
-  props: ['school-id'],
   firebase: {
     registrations: schoolRegistration
   },
@@ -381,11 +389,6 @@ export default {
   },
   updated: function () {
     this.loading = false
-  },
-  methods: {
-    onSelectSchool: function () {
-
-    }
   }
 }
 </script>
