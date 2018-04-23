@@ -35,8 +35,17 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-  const currentUser = firebase.auth().currentUser
+  let currentUser = firebase.auth().currentUser
   const requiresAuth = to.matched.some(record => record.meta.requiresAuth)
+
+  const localStorageLength = localStorage.length
+  for (let key = 0; key < localStorageLength; key++) {
+    if (localStorage.key(key).includes('firebase:authUser')) {
+      if (!currentUser) {
+        currentUser = JSON.parse(localStorage[localStorage.key(key)])
+      }
+    }
+  }
 
   if (requiresAuth && !currentUser) {
     next({
