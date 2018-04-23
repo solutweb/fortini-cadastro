@@ -122,6 +122,14 @@ a {
 
 //
 
+.limit-text {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .bottom-margin {
   margin-bottom: 30px;
 }
