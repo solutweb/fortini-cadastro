@@ -1,0 +1,259 @@
+html {
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0;
+  padding: 20px 0 !important;
+  background: #F5F5F5;
+  color: #454957;
+  min-width: 1260px;
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  height: 100vh;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  outline: 0;
+  outline: none;
+}
+
+p {
+  margin: 0;
+}
+
+strong {
+  font-weight: 600;
+}
+
+a {
+  text-decoration: none;
+}
+
+::-webkit-input-placeholder {
+  color: #999;
+}
+
+::-moz-placeholder {
+  color: #999;
+}
+
+:-ms-input-placeholder {
+  color: #999;
+}
+
+:-moz-placeholder {
+  color: #999;
+}
+
+.animate {
+  -webkit-transition: all 0.375s ease;
+  -moz-transition: all 0.375s ease;
+  -ms-transition: all 0.375s ease;
+  -o-transition: all 0.375s ease;
+  transition: all 0.375s ease;
+}
+
+.limit-text {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden !important;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+// Text
+.normal-text {
+  font-size: 16px;
+}
+
+.small-text {
+  font-size: 14px;
+}
+
+.smaller-text {
+  font-size: 12px;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-center {
+  text-align: center;
+}
+
+
+// Floats
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+//
+
+.limit-text {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bottom-margin {
+  margin-bottom: 30px;
+}
+
+// Forms
+.form-group {
+  position: relative;
+}
+
+// School shifts: Morning, Afternoon and Night
+.shift {
+  border-bottom: 0;
+  border-radius: 4px;
+  -webkit-transition: all 2.0s ease, max-height 0.60s ease-out;
+  -moz-transition: all 2.0s ease, max-height 0.60s ease-out;
+  -ms-transition: all 2.0s ease, max-height 0.60s ease-out;
+  -o-transition: all 2.0s ease, max-height 0.60s ease-out;
+  transition: all 2.0s ease, max-height 0.60s ease-out;
+  overflow: hidden;
+
+  .time {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto;
+    border-radius: 50%;
+    padding: 15px;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.8;
+      border: 1px solid #EEE;
+    }
+
+    .img-label {
+      display: block;
+      font-family: 'Satisfy', sans-serif;
+      font-size: 20px;
+      margin: 15px auto;
+      text-align: center;
+    }
+  }
+
+  .time-morning,
+  .time-afternoon,
+  .time-night {
+    visibility: hidden;
+    opacity: 0;
+    max-height: 0;
+    margin-top: 35px;
+    padding: 20px;
+    border: 1px solid #E5E5E5;
+    border-left: 0;
+    border-right: 0;
+    -webkit-transition: all 2.0s ease, max-height 0.60s ease-out;
+    -moz-transition: all 2.0s ease, max-height 0.60s ease-out;
+    -ms-transition: all 2.0s ease, max-height 0.60s ease-out;
+    -o-transition: all 2.0s ease, max-height 0.60s ease-out;
+    transition: all 2.0s ease, max-height 0.60s ease-out;
+    overflow: hidden;
+
+    ul {
+      margin: -20px;
+
+      li {
+        text-align: center;
+        padding: 10px;
+        border-bottom: 1px solid #E5E5E5;
+        border-left: 0;
+        border-right: 0;
+
+        &:nth-last-child(1) {
+          border-bottom: 0;
+        }
+      }
+    }
+
+    .and {
+      margin-left: 10px;
+    }
+  }
+
+  &.active {
+    margin-top: -1px;
+    border: 1px solid #E5E5E5;
+    border-bottom: 0;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+
+    .time {
+      filter: none;
+
+      &:hover {
+        opacity: 0.8;
+        border: none;
+      }
+    }
+
+    .time-morning,
+    .time-afternoon,
+    .time-night {
+      visibility: visible;
+      opacity: 1;
+      max-height: 460px;
+    }
+
+    &.filled {
+      border: 1px solid #24dbdd;
+      border-bottom: 0;
+      box-shadow: 0 0 15px rgba(36,219,221, 0.4);
+
+      .time-morning,
+      .time-afternoon,
+      .time-night {
+        border: 1px solid #24dbdd;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+        ul {
+          li {
+            border-bottom: 1px solid #24dbdd;
+            border-left: 0;
+            border-right: 0;
+          }
+        }
+      }
+    }
+  }
+}
