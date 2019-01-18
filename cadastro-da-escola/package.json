@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "bulma": "0.7.2",
-    "firebase": "5.7.3",
+    "firebase": "5.8.0",
     "node-sass": "4.11.0",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.1",
