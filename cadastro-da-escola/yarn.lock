@@ -606,6 +606,13 @@ async@^2.1.4, async@^2.4.1:
   dependencies:
     lodash "^4.14.0"
 
+async@^2.6.2:
+  version "2.6.3"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.6.3.tgz#d72625e2344a3656e3a3ad4fa749fa83299d82ff"
+  integrity sha512-zflvls11DCy+dQWzTW2dzuilv8Z5X/pjfmZOWba6TNIVDm+2UDaJmXSOXlasHKfNBs8oo3M0aT50fDEWfKZjXg==
+  dependencies:
+    lodash "^4.17.14"
+
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
@@ -2323,9 +2330,10 @@ debug@^3.1.0:
   dependencies:
     ms "2.0.0"
 
-debug@^3.2.5:
+debug@^3.1.1, debug@^3.2.5:
   version "3.2.6"
   resolved "https://registry.yarnpkg.com/debug/-/debug-3.2.6.tgz#e83d17de16d8a7efb7717edbe5fb10135eee629b"
+  integrity sha512-mel+jf7nrtEl5Pn1Qx46zARXKDpBbvzezse7p7LqINmdoIk8PYP5SySaxEmYv6TZ0JyEKA1hsCId6DIhgITtWQ==
   dependencies:
     ms "^2.1.1"
 
@@ -4495,6 +4503,11 @@ lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.5:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
+lodash@^4.17.14:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+
 log-symbols@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-2.2.0.tgz#5740e1c5d6f0dfda4ad9323b5332107ef6b4c40a"
@@ -5529,13 +5542,14 @@ pkg-dir@^3.0.0:
   dependencies:
     find-up "^3.0.0"
 
-portfinder@1.0.20:
-  version "1.0.20"
-  resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.20.tgz#bea68632e54b2e13ab7b0c4775e9b41bf270e44a"
+portfinder@1.0.26:
+  version "1.0.26"
+  resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.26.tgz#475658d56ca30bed72ac7f1378ed350bd1b64e70"
+  integrity sha512-Xi7mKxJHHMI3rIUrnm/jjUgwhbYMkp/XKEcZX3aG4BrumLpq3nmoQMX+ClYnDZnZ/New7IatC1no5RX0zo1vXQ==
   dependencies:
-    async "^1.5.2"
-    debug "^2.2.0"
-    mkdirp "0.5.x"
+    async "^2.6.2"
+    debug "^3.1.1"
+    mkdirp "^0.5.1"
 
 portfinder@^1.0.9:
   version "1.0.13"
